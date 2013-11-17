@@ -1,0 +1,57 @@
+[
+ ;; students
+
+ {:db/id #db/id[:db.part/db]
+  :db/ident :student/name
+  :db/valueType :db.type/string
+  :db/cardinality :db.cardinality/one
+  :db/doc "A student's name"
+  :db.install/_attribute :db.part/db}
+
+ {:db/id #db/id[:db.part/db]
+  :db/ident :student/scores
+  :db/valueType :db.type/ref
+  :db/cardinality :db.cardinality/many
+  :db/doc "A student's scores"
+  :db.install/_attribute :db.part/db}
+
+ ;; tests
+
+ {:db/id #db/id[:db.part/db]
+  :db/ident :test/date
+  :db/valueType :db.type/instant
+  :db/cardinality :db.cardinality/one
+  :db/doc "A test's date"
+  :db.install/_attribute :db.part/db}
+
+ {:db/id #db/id[:db.part/db]
+  :db/ident :test/weight
+  :db/valueType :db.type/float
+  :db/cardinality :db.cardinality/one
+  :db/doc "A test's weight"
+  :db.install/_attribute :db.part/db}
+
+ {:db/id #db/id[:db.part/db]
+  :db/ident :test/max-points
+  :db/valueType :db.type/long
+  :db/cardinality :db.cardinality/one
+  :db/doc "A test's max points"
+  :db.install/_attribute :db.part/db}
+
+ ;; scores
+
+ {:db/id #db/id[:db.part/db]
+  :db/ident :score/points
+  :db/valueType :db.type/long
+  :db/cardinality :db.cardinality/one
+  :db/doc "A score's points"
+  :db.install/_attribute :db.part/db}
+
+ {:db/id #db/id[:db.part/db]
+  :db/ident :score/test
+  :db/valueType :db.type/ref
+  :db/cardinality :db.cardinality/one
+  :db/doc "A score's associated test"
+  :db.install/_attribute :db.part/db}
+
+]
