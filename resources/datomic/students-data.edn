@@ -1,0 +1,31 @@
+[
+ ;; a couple of students
+
+ {:db/id #db/id [:db.part/user -100]
+  :student/name "Josephine Müller"}
+
+ {:db/id #db/id [:db.part/user -101]
+  :student/name "Marcel Meier"}
+
+ ;; there was a test on Nov 15th 
+
+ {:db/id #db/id [:db.part/user -200]
+  :test/date ""
+  :test/weight 1.0
+  :test/max-points 100}
+
+ ;; Josephine did ok
+
+ {:db/id #db/id [:db.part/user -300]
+  :score/points 95
+  :score/test #db/id [:db.part/user -200]
+  :student/_scores #db/id [:db.part/user -100]}
+
+ ;; the Marcel needs to study some more
+
+ {:db/id #db/id [:db.part/user -301]
+  :score/points 40
+  :score/test #db/id [:db.part/user -200]
+  :student/_scores #db/id [:db.part/user -101]}
+ 
+]
