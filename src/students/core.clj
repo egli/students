@@ -62,21 +62,41 @@
          [?e :test/max-points ?points]] (d/db conn))
 
 ;; get all scores for a student
-#_(d/q '[:find ?name ?score :where
+#_(d/q '[:find ?name ?points :where
        [?e :student/name ?name]
-       [?e :student/scores ?score]
+       [?e :student/scores ?s]
+       [?s :score/points ?points]
        ] (d/db conn))
 
-;; get the max points that any student did in a particular test
-#_(d/q '[:find ?t (max ?p) :where
-       [?t :test/date]
+;; get the max points that any student did in a test
+#_(d/q '[:find ?date (max ?p) :where
+       [?t :test/date ?date]
        [?s :score/test ?t]
        [?s :score/points ?p]
        ] (d/db conn))
 
-;; get the percentage for a student for a particular test
-#_(d/q '[:find ?t (max ?p) :where
-       [?t :test/date]
+(defn percent [points max-points]
+  (* (/ points max-points) 100.0))
+
+;; get the percentage for any student for any test
+#_(d/q '[:find ?date ?percent :where
+       [?t :test/date ?date]
+       [?t :test/max-points ?max-points]
        [?s :score/test ?t]
-       [?s :score/points ?p]
+       [?s :score/points ?points]
+       [(students.core/percent ?points ?max-points) ?percent]
+       ] (d/db conn))
+
+(defn grade [points max-points]
+  (+ (* (/ points max-points) 5.0) 1))
+
+;; get the grade for any student for any  test
+#_(d/q '[:find ?date ?student ?grade :where
+       [?t :test/date ?date]
+       [?t :test/max-points ?max-points]
+       [?s :score/test ?t]
+       [?s :score/points ?points]
+       [?e :student/scores ?s]
+       [?e :student/name ?student]
+       [(students.core/grade ?points ?max-points) ?grade]
        ] (d/db conn))
