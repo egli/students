@@ -75,6 +75,19 @@
        [?s :score/points ?p]
        ] (d/db conn))
 
+;; Parameterized queries
+
+;; get all scores for a particular student
+#_(d/q '[:find ?name ?points 
+       :in $ ?name
+       :where 
+       [?e :student/name ?name]
+       [?e :student/scores ?s]
+       [?s :score/points ?points]
+       ] 
+     (d/db conn) 
+     "Josephine Müller")
+
 ;; Expression clauses aka stored procedures
 
 (defn percent [points max-points]
