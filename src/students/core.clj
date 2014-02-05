@@ -61,7 +61,7 @@
          [?e :test/weight ?weight]
          [?e :test/max-points ?points]] (d/db conn))
 
-;; get all scores for a student
+;; get all scores for any student
 #_(d/q '[:find ?name ?points :where
        [?e :student/name ?name]
        [?e :student/scores ?s]
@@ -74,6 +74,8 @@
        [?s :score/test ?t]
        [?s :score/points ?p]
        ] (d/db conn))
+
+;; Expression clauses aka stored procedures
 
 (defn percent [points max-points]
   (* (/ points max-points) 100.0))
