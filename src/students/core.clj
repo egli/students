@@ -115,3 +115,7 @@
        [?e :student/name ?student]
        [(students.core/grade ?points ?max-points) ?grade]
        ] (d/db conn))
+
+;; show an example of a datomic rule aka views
+
+;; what about negation?
